@@ -1,3 +1,46 @@
+# How to Run Training and Test
+- These steps were run and verified on Linux system. For anyone on another OS, good luck! Ensure your system matches the dependencies specified below
+- If you're running arm, expect **significant** code migration
+
+## System Requirements
+- Linux (specific specs to be added later)
+
+## Step 1: Install MuJoCo
+```bash
+sudo apt install unzip
+mkdir ~/.mujoco && cd ~/.mujoco
+wget https://www.roboti.us/download/mujoco200_linux.zip
+unzip mujoco200_linux.zip && mv mujoco200_linux.zip mujoco200
+wget https://www.roboti.us/file/mjkey.txt
+```
+
+## Step 2: Update Environment Variables
+```bash
+export LD_LIBRARY_PATH=/home/<YOUR_USER_NAME>/.mujoco/mujoco200/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia
+export PATH="$LD_LIBRARY_PATH:$PATH"
+export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLEW.so
+```
+## Step 3: Install MuJoCo Dependencies
+```bash
+sudo apt-get install patchelf
+sudo apt-get install python3-dev build-essential libssl-dev libffi-dev libxml2-dev  
+sudo apt-get install libxslt1-dev zlib1g-dev libglew-dev python3-pip
+sudo apt install libosmesa6-dev libgl1-mesa-glx libglfw3
+```
+## Step 4: Clone Repo and Install Dependencies
+```bash
+cd ~ 
+sudo apt install git-all
+git clone https://github.com/aliameur/pytorch-maml-rl
+cd pytorch-maml-rl
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+**Happy Training!**
+
+
 # Reinforcement Learning with Model-Agnostic Meta-Learning (MAML)
 
 ![HalfCheetahDir](https://raw.githubusercontent.com/tristandeleu/pytorch-maml-rl/master/_assets/halfcheetahdir.gif)
