@@ -10,17 +10,23 @@
 sudo apt install unzip
 mkdir ~/.mujoco && cd ~/.mujoco
 wget https://www.roboti.us/download/mujoco200_linux.zip
-unzip mujoco200_linux.zip && mv mujoco200_linux.zip mujoco200
+unzip mujoco200_linux.zip && mv mujoco200_linux mujoco200
 wget https://www.roboti.us/file/mjkey.txt
 ```
 
 ## Step 2: Update Environment Variables
+
+```bash
+nano ~/.bashrc
+```
+Add the following lines to the bottom of the file, and save.
 ```bash
 export LD_LIBRARY_PATH=/home/<YOUR_USER_NAME>/.mujoco/mujoco200/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia
 export PATH="$LD_LIBRARY_PATH:$PATH"
 export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLEW.so
 ```
+
 ## Step 3: Install MuJoCo Dependencies
 ```bash
 sudo apt-get install patchelf
@@ -28,12 +34,17 @@ sudo apt-get install python3-dev build-essential libssl-dev libffi-dev libxml2-d
 sudo apt-get install libxslt1-dev zlib1g-dev libglew-dev python3-pip
 sudo apt install libosmesa6-dev libgl1-mesa-glx libglfw3
 ```
+Then run
+```bash
+source ~/.bashrc
+```
 ## Step 4: Clone Repo and Install Dependencies
 ```bash
 cd ~ 
 sudo apt install git-all
 git clone https://github.com/aliameur/pytorch-maml-rl
 cd pytorch-maml-rl
+sudo apt install python3.11-venv
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
